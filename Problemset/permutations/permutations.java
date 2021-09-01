@@ -1,8 +1,8 @@
 
 // @Title: 全排列 (Permutations)
 // @Author: tongyaocheng@gmail.com
-// @Date: 2021-03-03 08:17:41
-// @Runtime: 2 ms
+// @Date: 2021-08-26 11:06:52
+// @Runtime: 1 ms
 // @Memory: 38.5 MB
 
 class Solution {
@@ -11,16 +11,22 @@ class Solution {
     List<Integer> temp = new ArrayList<>();
 
     public List<List<Integer>> permute(int[] nums) {
-        if (temp.size() == nums.length) { result.add(new ArrayList<>(temp)); }
-        for (int num : nums) {
-            if (!temp.contains(num)) {
-                temp.add(num);
-                permute(nums);
-                temp.remove(temp.size() - 1);
-            }
-        }
+        backTrack(nums);
         return result;
     }
 
-}
+    private void backTrack(int[] nums) {
+        if (temp.size() == nums.length) {
+            result.add(new ArrayList<>(temp));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (!temp.contains(nums[i])) {
+                temp.add(nums[i]);
+                backTrack(nums);
+                temp.remove(temp.size() - 1);
+            }
+        }
+    }
 
+}
